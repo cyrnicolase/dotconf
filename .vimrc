@@ -1,3 +1,6 @@
+let mapleader = ","
+let g:mapleader = ","
+
 set expandtab
 set shiftwidth=4
 set tabstop=4
@@ -150,7 +153,8 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme="luna" 
-" let g:airline_powerline_fonts = 1 
+" let g:airline_theme="molokai"
+let g:airline_powerline_fonts = 1 
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -159,6 +163,5 @@ let g:airline_theme="luna"
 set ofu=syntaxcomplete#Complete
 autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
 set dictionary=/home/work/.vim/dict/php.dict
-
-
+map <leader>run :w<CR>:!php %<CR>
 
