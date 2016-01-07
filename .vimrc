@@ -1,6 +1,7 @@
 let mapleader = ","
 let g:mapleader = ","
 
+set so=5
 set expandtab
 set shiftwidth=4
 set tabstop=4
@@ -26,30 +27,28 @@ Bundle 'gmarik/vundle'
 
 " My Bundles here:
 " original repos on github
-Bundle 'christoomey/vim-run-interactive'
+" Bundle 'croaky/vim-colors-github'
+" Bundle 'kchmck/vim-coffee-script'
+" Bundle 'slim-template/vim-slim'
+" Bundle 'thoughtbot/vim-rspec'
+" Bundle 'vim-ruby/vim-ruby'
+" Bundle 'tpope/vim-rails'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'croaky/vim-colors-github'
-Bundle 'danro/rename.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'pbrisbin/vim-mkdir'
 Bundle 'scrooloose/syntastic'
-Bundle 'slim-template/vim-slim'
-Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-fugitive' 
 Bundle 'tpope/vim-surround'
-Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/ctags.vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/tComment'
 Bundle "mattn/emmet-vim"
 Bundle "scrooloose/nerdtree"
-" Bundle "Lokaltog/vim-powerline"
-Bundle "bling/vim-airline"
+Bundle "Lokaltog/vim-powerline"
+" Bundle "bling/vim-airline"
 Bundle "godlygeek/tabular"
 Bundle "msanders/snipmate.vim"
 Bundle "jelera/vim-javascript-syntax"
@@ -63,6 +62,7 @@ Bundle "Lokaltog/vim-easymotion"
 Bundle "tomasr/molokai"
 Bundle "klen/python-mode"
 Bundle "shawncplus/phpcomplete.vim"
+Bundle "jiangmiao/auto-pairs"
 
 " vim-scripts repos
 Bundle 'taglist.vim'
@@ -110,9 +110,16 @@ let Tlist_Sort_Type = "order"
 let Tlist_Use_Horiz_Window = 0
 let Tlist_Use_Right_Window = 1
 let Tlist_WinWidth = 40
+" 已经不更新了
+map <silent> <F4> :TlistToggle<cr>
 
 
-map <silent> <F3> :TlistToggle<cr>
+"""""""""""""""""""""""""""""""""""""""""""""
+"        Tagbar 
+"""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <F3> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       NerdTree
@@ -138,7 +145,7 @@ let g:syntastic_php_checkers = ["php"]
 
 
 """"""""""""""""""""""""""""""""""""""""""""
-"       StatusLine
+"       PowerLine
 """"""""""""""""""""""""""""""""""""""""""""
 set laststatus=2
 set nocompatible
@@ -154,7 +161,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme="luna" 
 " let g:airline_theme="molokai"
-let g:airline_powerline_fonts = 1 
+" let g:airline_powerline_fonts = 1 
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -164,4 +171,13 @@ set ofu=syntaxcomplete#Complete
 autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
 set dictionary=/home/work/.vim/dict/php.dict
 map <leader>run :w<CR>:!php %<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       Emmet
+"       ref: http://www.jianshu.com/p/67fa1e2114c5
+""""""""""""""""""""""""""""""""""""""""""""
+let g:user_emmet_install_global=0
+autocmd filetype html,css EmmetInstal
+
 
