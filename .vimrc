@@ -33,6 +33,7 @@ Bundle 'gmarik/vundle'
 " Bundle 'thoughtbot/vim-rspec'
 " Bundle 'vim-ruby/vim-ruby'
 " Bundle 'tpope/vim-rails'
+" Bundle 'xsbeats/vim-blade'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
@@ -45,24 +46,22 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/ctags.vim'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/tComment'
-Bundle "mattn/emmet-vim"
-Bundle "scrooloose/nerdtree"
-Bundle "Lokaltog/vim-powerline"
-" Bundle "bling/vim-airline"
-Bundle "godlygeek/tabular"
-Bundle "msanders/snipmate.vim"
-Bundle "jelera/vim-javascript-syntax"
-Bundle "altercation/vim-colors-solarized"
-Bundle "othree/html5.vim"
-Bundle "xsbeats/vim-blade"
-Bundle "Raimondi/delimitMate"
-Bundle "groenewege/vim-less"
-Bundle "evanmiller/nginx-vim-syntax"
-Bundle "Lokaltog/vim-easymotion"
-Bundle "tomasr/molokai"
-Bundle "klen/python-mode"
-Bundle "shawncplus/phpcomplete.vim"
-Bundle "jiangmiao/auto-pairs"
+Bundle 'mattn/emmet-vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/vim-powerline'
+" Bundle 'bling/vim-airline'
+Bundle 'godlygeek/tabular'
+Bundle 'msanders/snipmate.vim'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'othree/html5.vim'
+Bundle 'groenewege/vim-less'
+Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tomasr/molokai'
+Bundle 'klen/python-mode'
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'jiangmiao/auto-pairs'
 
 " vim-scripts repos
 Bundle 'taglist.vim'
@@ -179,5 +178,30 @@ map <leader>run :w<CR>:!php %<CR>
 """"""""""""""""""""""""""""""""""""""""""""
 let g:user_emmet_install_global=0
 autocmd filetype html,css EmmetInstal
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       vim-javascript-syntax
+""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType javascript call JavaScriptFold()
+
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       vim-colors-solarized
+""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+" set background=dark
+" colorscheme solarized
+
+" syntax enable
+" set background=light
+" colorscheme solarized
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        Auto-Pairs 
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoPairsFlyMode = 1
+
 
 
