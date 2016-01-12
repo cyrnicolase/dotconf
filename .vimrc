@@ -9,6 +9,8 @@ set smarttab
 set laststatus=2
 set hlsearch
 set ignorecase
+set ruler
+set nobackup
 
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -167,8 +169,8 @@ let g:airline_theme="luna"
 "       PHP
 """"""""""""""""""""""""""""""""""""""""""""
 set ofu=syntaxcomplete#Complete
-autocmd FileType php set complete+=k~/.vim/dict/PHP.dict
-set dictionary=/home/work/.vim/dict/php.dict
+set complete-=k complete+=k
+au FileType php setlocal dict+=~/.vim/dict/PHP.dict
 map <leader>run :w<CR>:!php %<CR>
 
 
@@ -202,6 +204,13 @@ syntax enable
 "        Auto-Pairs 
 """""""""""""""""""""""""""""""""""""""""""""
 let g:AutoPairsFlyMode = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        PHPComplete 
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
 
 
 
