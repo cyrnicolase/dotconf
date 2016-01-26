@@ -184,6 +184,12 @@ autocmd filetype html,css EmmetInstal
 
 
 """"""""""""""""""""""""""""""""""""""""""""
+"       vim-javascript-syntax
+""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType javascript call JavaScriptFold()
+
+
+""""""""""""""""""""""""""""""""""""""""""""
 "       vim-colors-solarized
 """"""""""""""""""""""""""""""""""""""""""""
 syntax enable
