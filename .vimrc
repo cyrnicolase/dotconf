@@ -1,6 +1,10 @@
+" 版本管理工具vundle
+" git clone https://github.com/gmarik/vundle.git  ~/.vim/bundle/vundle
+
 let mapleader = ","
 let g:mapleader = ","
 
+set fileformat=unix
 set so=5
 set expandtab
 set shiftwidth=4
@@ -13,12 +17,29 @@ set ruler
 set nobackup
 
 set nocompatible               " be iMproved
-filetype off                   " required!
+" filetype off                   " required!
 
 " chinese character supported
 set fileencodings=utf-8,cp936,gbk,default,latin1
 set encoding=utf-8
 set termencoding=utf-8
+
+" new file auto add header by filetype
+autocmd BufNewFile *.sh,*.php exec ":call SetTitle()"
+func SetTitle()
+    if &filetype == 'php'
+        call setline(1, "<?php")
+        call setline(2, "")
+    endif
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+        call setline(2, "")
+    endif
+
+    " jump to the last line
+    autocmd BufNewFile * normal G
+endfunc
+
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -36,6 +57,7 @@ Bundle 'gmarik/vundle'
 " Bundle 'vim-ruby/vim-ruby'
 " Bundle 'tpope/vim-rails'
 " Bundle 'xsbeats/vim-blade'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
@@ -50,7 +72,6 @@ Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/tComment'
 Bundle 'mattn/emmet-vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'msanders/snipmate.vim'
@@ -64,9 +85,11 @@ Bundle 'tomasr/molokai'
 Bundle 'klen/python-mode'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'pangloss/vim-javascript'
+Bundle 'stephpy/vim-php-cs-fixer'
 
 " vim-scripts repos
-Bundle 'taglist.vim'
+" Bundle 'taglist.vim'
 
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
@@ -158,11 +181,13 @@ let g:Powerline_symbols = 'fancy'
 "       AirLine
 """"""""""""""""""""""""""""""""""""""""""""
 " set laststatus=2
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 " let g:airline_theme="luna" 
 " let g:airline_theme="molokai"
 let g:airline_powerline_fonts = 1 
+nnoremap <C-N>: bn<CR>
+nnoremap <C-P>: bp<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -181,12 +206,6 @@ map <leader>run :w<CR>:!php %<CR>
 let g:user_emmet_install_global=0
 autocmd filetype html,css EmmetInstal
 
-
-
-""""""""""""""""""""""""""""""""""""""""""""
-"       vim-javascript-syntax
-""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType javascript call JavaScriptFold()
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -212,5 +231,13 @@ let g:AutoPairsFlyMode = 0
 let g:phpcomplete_relax_static_constraint = 1
 let g:phpcomplete_complete_for_unknown_classes = 1
 
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        PHP-cs-fixer
+"""""""""""""""""""""""""""""""""""""""""""""
+" let g:php_cs_fixer_path = "~/bin/php-cs-fixer"
+" let g:php_cs_fixer_level = "psr2"
+" let g:php_cs_fixer_verbose = 0
+" autocmd BufWritePost *.php call PhpCsFixerFixFile()
 
 
