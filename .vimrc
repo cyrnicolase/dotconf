@@ -87,6 +87,7 @@ Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'pangloss/vim-javascript'
 Bundle 'stephpy/vim-php-cs-fixer'
+Bundle 'docunext/closetag.vim'
 
 " vim-scripts repos
 " Bundle 'taglist.vim'
@@ -163,9 +164,12 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_php_checkers = ["php"]
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_php_phpmd_exec = "~/bin/phpmd"
+let g:syntastic_php_phpmd_post_args = "~/.vim/custom/ruleset.xml"
 
 
 """"""""""""""""""""""""""""""""""""""""""""
