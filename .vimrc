@@ -239,9 +239,13 @@ let g:phpcomplete_complete_for_unknown_classes = 1
 """""""""""""""""""""""""""""""""""""""""""""
 "        PHP-cs-fixer
 """""""""""""""""""""""""""""""""""""""""""""
-" let g:php_cs_fixer_path = "~/bin/php-cs-fixer"
-" let g:php_cs_fixer_level = "psr2"
-" let g:php_cs_fixer_verbose = 0
-" autocmd BufWritePost *.php call PhpCsFixerFixFile()
+let g:php_cs_fixer_path = "~/bin/php-cs-fixer" " define the path to the php-cs-fixer
+let g:php_cs_fixer_level = "all"                " which level ?
+let g:php_cs_fixer_config = "default"           " configuration
+let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
+" let g:php_cs_fixer_fixers_list = ""             " List of fixers
+let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option"
 
-
+map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
+map <leader>pcf :call PhpCsFixerFixFile()<CR>
