@@ -1,16 +1,20 @@
 " 版本管理工具vundle
 " git clone https://github.com/gmarik/vundle.git  ~/.vim/bundle/vundle
 
+filetype plugin indent on     " required!
 let mapleader = ","
 let g:mapleader = ","
 
-set fileformat=unix
 set so=5
-set expandtab
 set shiftwidth=4
 set tabstop=4
-set smarttab
+" set softtabstop=4
 set laststatus=2
+set fileformat=unix
+set autoindent
+set expandtab
+set smarttab
+" set cindent
 set hlsearch
 set ignorecase
 set ruler
@@ -40,6 +44,9 @@ func SetTitle()
     autocmd BufNewFile * normal G
 endfunc
 
+" open json file with javascript syntastic
+autocmd BufNewFile,BufRead *.json set filetype=javascript
+
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -58,6 +65,7 @@ Bundle 'gmarik/vundle'
 " Bundle 'tpope/vim-rails'
 " Bundle 'xsbeats/vim-blade'
 " Bundle 'Lokaltog/vim-powerline'
+" Bundle 'altercation/vim-colors-solarized'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
@@ -76,7 +84,6 @@ Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'msanders/snipmate.vim'
 Bundle 'jelera/vim-javascript-syntax'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'othree/html5.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'evanmiller/nginx-vim-syntax'
@@ -86,8 +93,10 @@ Bundle 'klen/python-mode'
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'pangloss/vim-javascript'
-Bundle 'stephpy/vim-php-cs-fixer'
+" Bundle 'stephpy/vim-php-cs-fixer'
 Bundle 'docunext/closetag.vim'
+Bundle 'Yggdroot/indentLine'
+Bundle 'dericofilho/vim-phpfmt'
 
 " vim-scripts repos
 " Bundle 'taglist.vim'
@@ -98,7 +107,6 @@ Bundle 'docunext/closetag.vim'
 " Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-filetype plugin indent on     " required!
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -152,7 +160,6 @@ let g:tagbar_autofocus = 1
 let g:NERDTreeDirArrows=0
 map <F2> :NERDTreeToggle<CR>
 
-
 """"""""""""""""""""""""""""""""""""""""""""
 "       Syntastic
 """"""""""""""""""""""""""""""""""""""""""""
@@ -189,6 +196,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 " let g:airline_theme="luna" 
 " let g:airline_theme="molokai"
+" let g:airline_theme="solarized"
 let g:airline_powerline_fonts = 1 
 nnoremap <C-N>: bn<CR>
 nnoremap <C-P>: bp<CR>
@@ -197,10 +205,13 @@ nnoremap <C-P>: bp<CR>
 """"""""""""""""""""""""""""""""""""""""""""
 "       PHP
 """"""""""""""""""""""""""""""""""""""""""""
-set ofu=syntaxcomplete#Complete
-set complete-=k complete+=k
-au FileType php setlocal dict+=~/.vim/dict/PHP.dict
 map <leader>run :w<CR>:!php %<CR>
+
+au Filetype php call AddPHPFuncList()
+function AddPHPFuncList()
+    set directory-=~/.vim/dict/php_function.txt directory+=~/.vim/dict/php_function.txt
+    set complete-=k complete+=k
+endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -239,13 +250,50 @@ let g:phpcomplete_complete_for_unknown_classes = 1
 """""""""""""""""""""""""""""""""""""""""""""
 "        PHP-cs-fixer
 """""""""""""""""""""""""""""""""""""""""""""
-let g:php_cs_fixer_path = "~/bin/php-cs-fixer" " define the path to the php-cs-fixer
-let g:php_cs_fixer_level = "all"                " which level ?
-let g:php_cs_fixer_config = "default"           " configuration
-let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
-" let g:php_cs_fixer_fixers_list = ""             " List of fixers
-let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option"
+" let g:php_cs_fixer_path = "~/bin/php-cs-fixer" " define the path to the php-cs-fixer
+" let g:php_cs_fixer_level = "all"                " which level ?
+" let g:php_cs_fixer_config = "default"           " configuration
+" let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
+" let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default (<leader>pcd)
+" let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option"
+" 
+" map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
+" map <leader>pcf :call PhpCsFixerFixFile()<CR>
 
-map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
-map <leader>pcf :call PhpCsFixerFixFile()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        IndentLine
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_color_term = 239
+let g:indentline_char = 'c'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:molokai_original=1
+let g:rehash256=1
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        dericofilho/vim-phpfmt
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:phpfmt_on_save = get(g:, 'phpfmt_on_save', 1) " format on save (autocmd)
+let g:phpfmt_php_path = "php"               " Path to PHP
+"let g:phpfmt_prepasses_list = "AutoPreincrement,JointToImplode"
+"let g:phpfmt_passes_list = "ReturnNull"
+let g:phpfmt_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:phpfmt_indent_with_space = 4         " use spaces instead of tabs for indentation
+"let g:phpfmt_enable_auto_align = 1         " Enable auto align of = and =>
+"let g:phpfmt_visibility_order = 1          " Fixes visibiliy order for method in classes - PSR-2 4.2
+"let g:smart_linebreak_after_curly = 1      " Convert multistatement blocks into multiline blocks
+
+
+
+
+
+
+
+
+
