@@ -5,6 +5,8 @@ filetype plugin indent on     " required!
 let mapleader = ","
 let g:mapleader = ","
 
+map <leader>t :tabnew<CR>
+
 set so=5
 set shiftwidth=4
 set tabstop=4
@@ -198,8 +200,8 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " let g:airline_theme="molokai"
 " let g:airline_theme="solarized"
 let g:airline_powerline_fonts = 1 
-nnoremap <C-N>: bn<CR>
-nnoremap <C-P>: bp<CR>
+" nnoremap <C-N>: bn<CR>
+" nnoremap <C-P>: bp<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -207,7 +209,8 @@ nnoremap <C-P>: bp<CR>
 """"""""""""""""""""""""""""""""""""""""""""
 map <leader>run :w<CR>:!php %<CR>
 
-au Filetype php call AddPHPFuncList()
+" autocmd Filetype php setlocal omnifunc=phpcomelete#Complete
+autocmd Filetype php call AddPHPFuncList()
 function AddPHPFuncList()
     set directory-=~/.vim/dict/php_function.txt directory+=~/.vim/dict/php_function.txt
     set complete-=k complete+=k
@@ -243,8 +246,8 @@ let g:AutoPairsFlyMode = 0
 """""""""""""""""""""""""""""""""""""""""""""
 "        PHPComplete 
 """""""""""""""""""""""""""""""""""""""""""""
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_complete_for_unknown_classes = 1
+" let g:phpcomplete_relax_static_constraint = 1
+" let g:phpcomplete_complete_for_unknown_classes = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -280,6 +283,7 @@ let g:rehash256=1
 "        dericofilho/vim-phpfmt
 """""""""""""""""""""""""""""""""""""""""""""
 let g:phpfmt_on_save = get(g:, 'phpfmt_on_save', 1) " format on save (autocmd)
+let g:phpfmt_update_on_open = get(g:, 'phpfmt_update_on_open', 0)   " NO UPDATE ON OPEN
 let g:phpfmt_config = "/home/work/.vim/custom/phpfmt.ini"
 " let g:phpfmt_php_path = "php"               " Path to PHP
 " let g:phpfmt_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
