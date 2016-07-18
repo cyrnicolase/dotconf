@@ -1,7 +1,7 @@
 # 一些个人软件配置文件汇总
 ## vim.conf
 1. Linux 环境下.vimrc 文件
-2. 使用Bundle 进行包管理
+2. 使用vundle 进行包管理
 3. .vim 目录包含一些插件个人配置
 
 ## tmux.conf
