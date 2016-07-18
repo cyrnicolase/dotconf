@@ -6,6 +6,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 map <leader>t :tabnew<CR>
+map <leader>j :set filetype=javascript<CR>:w<CR>
 
 set so=5
 set shiftwidth=4
@@ -99,6 +100,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'docunext/closetag.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'dericofilho/vim-phpfmt'
+" Bundle 'airblade/vim-gitgutter'
 
 " vim-scripts repos
 " Bundle 'taglist.vim'
@@ -160,6 +162,11 @@ let g:tagbar_autofocus = 1
 "       NerdTree
 """"""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrowExpandable = "+"
+let g:NERDTreeDirArrowCollapsible = "~"
+let g:NERDTreeCascadeOpenSingleChildDir = 1
+let g:NERDTreeAutoCenterThreshold = 1
+let g:NERDTreeShowHidden = 0
 map <F2> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -264,12 +271,6 @@ let g:AutoPairsFlyMode = 0
 " map <leader>pcf :call PhpCsFixerFixFile()<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""
-"        IndentLine
-"""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_color_term = 239
-let g:indentline_char = 'c'
-
 
 """""""""""""""""""""""""""""""""""""""""""""
 "        colorscheme
@@ -278,12 +279,11 @@ let g:molokai_original=1
 let g:rehash256=1
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""
 "        dericofilho/vim-phpfmt
 """""""""""""""""""""""""""""""""""""""""""""
 let g:phpfmt_on_save = get(g:, 'phpfmt_on_save', 1) " format on save (autocmd)
-let g:phpfmt_update_on_open = get(g:, 'phpfmt_update_on_open', 0)   " NO UPDATE ON OPEN
+let g:phpfmt_indent_with_space = 4         " use spaces instead of tabs for indentation
 let g:phpfmt_config = "/home/work/.vim/custom/phpfmt.ini"
 " let g:phpfmt_php_path = "php"               " Path to PHP
 " let g:phpfmt_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
@@ -292,7 +292,19 @@ let g:phpfmt_config = "/home/work/.vim/custom/phpfmt.ini"
 " let g:visibility_order = 1          " Fixes visibiliy order for method in classes - PSR-2 4.2
 " let g:smart_linebreak_after_curly = 1      " Convert multistatement blocks into multiline blocks
 " let g:phpfmt_update_on_open = 0     " No self update
-" 
-" let g:phpfmt_exclude_list = "StripExtraCommaInArray,StripSpaces"
-" let g:phpfmt_passes_list = "AddMissingParentheses,AliasToMaster,AlignDoubleSlashComments,AlignPHPCode,AutoPreincrement,AutoSemicolon,OrderMethod,PHPDocTypesToFunctionTypehint,PSR2EmptyFunction,ReindentAndAlignObjOps,ReindentSwitchBlocks,RemoveIncludeParentheses,RemoveSemicolonAfterCurly,ReplaceIsNull,ReturnNull,ShortArray,SmartLnAfterCurlyOpen,SpaceAroundControlStructures,SpaceBetweenMethods,StripNewlineAfterClassOpen,StripNewlineAfterCurlyOpen,StripNewlineWithinClassBody,StripSpaceWithinControlStructures,TrimSpaceBeforeSemicolon,UpgradeToPreg,WordWrap,WrongConstructorName,YodaComparisons,NewLineBeforeReturn,MergeNamespaceWithOpenTag,MergeElseIf,JoinToImplode,GeneratePHPDoc,DoubleToSingleQuote,ConvertOpenTagWithEcho,ClassToStatic"
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        IndentLine
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_color_term = 239
+let g:indentline_char = 'c'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        ctrlp
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_custom_ignore = 'node_modules\|aop' "ignore node_modules directory
+
 
