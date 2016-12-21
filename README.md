@@ -5,8 +5,10 @@
 3. .vim 目录包含一些插件个人配置
 
 ## tmux.conf
-个人的tmux 配置文件
+tmux 配置文件
 
 ## sublime.conf
-个人的sublime 的配置，主要是SETI_UI 的配置
+sublime 的配置，主要是SETI_UI 的配置
 
+## cs.vim
+php-cs-fixer vim 保存时，执行代码的格式化
