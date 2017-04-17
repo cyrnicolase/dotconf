@@ -14,7 +14,7 @@ set shiftwidth=4
 set tabstop=4
 " set softtabstop=4
 set laststatus=2
-set fileformat=unix
+set fileformats=unix,dos
 set autoindent
 set expandtab
 set smarttab
@@ -31,6 +31,11 @@ set nocompatible               " be iMproved
 set fileencodings=utf-8,cp936,gbk,default,latin1
 set encoding=utf-8
 set termencoding=utf-8
+
+" GUI without menu and toolbar
+if has('gui_running') && filereadable("~/.gvimrc")
+    source ~/.gvimrc
+endif
 
 " new file auto add header by filetype
 " autocmd BufNewFile *.sh,*.php exec ":call SetTitle()"
@@ -49,8 +54,8 @@ set termencoding=utf-8
 " endfunc
 
 " open json file with javascript syntastic
-autocmd BufNewFile,BufRead *.json, set filetype=javascript
-autocmd BufNewFile,BufRead *.js, set filetype=javascript
+autocmd BufNewFile, BufRead *.json, *.js set filetype=javascript
+" autocmd BufNewFile,BufRead *.js, set filetype=javascript
 
 
 set rtp+=~/.vim/bundle/vundle/
@@ -71,7 +76,6 @@ Bundle 'gmarik/vundle'
 " Bundle 'xsbeats/vim-blade'
 " Bundle 'Lokaltog/vim-powerline'
 " Bundle 'altercation/vim-colors-solarized'
-" Bundle 'majutsushi/tagbar'
 " Bundle 'tpope/vim-bundler'
 " Bundle 'tpope/vim-surround'
 " Bundle 'vim-scripts/matchit.zip'
@@ -79,8 +83,6 @@ Bundle 'gmarik/vundle'
 " Bundle 'mattn/emmet-vim'
 " Bundle 'msanders/snipmate.vim'
 " Bundle 'othree/html5.vim'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'tomasr/molokai'
 " Bundle 'klen/python-mode'
 " Bundle 'shawncplus/phpcomplete.vim'
 " Bundle 'pangloss/vim-javascript'
@@ -89,6 +91,11 @@ Bundle 'gmarik/vundle'
 " Bundle 'Yggdroot/indentLine'
 " Bundle 'dericofilho/vim-phpfmt'
 " Bundle 'airblade/vim-gitgutter'
+" Bundle 'tomasr/molokai'
+Bundle 'posva/vim-vue'
+Bundle 'majutsushi/tagbar'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive' 
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
@@ -98,6 +105,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'vim-scripts/ctags.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'bling/vim-airline'
+Bundle 'powerline/fonts'
 Bundle 'godlygeek/tabular'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'groenewege/vim-less'
@@ -235,16 +243,6 @@ endfunction
 
 
 
-""""""""""""""""""""""""""""""""""""""""""""
-"       vim-colors-solarized
-""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-" set background=dark
-" colorscheme solarized
-
-" syntax enable
-" set background=light
-" colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""
 "        Auto-Pairs 
@@ -355,8 +353,27 @@ let g:ctrlp_custom_ignore = 'node_modules\|aop' "ignore node_modules directory
 "        vim-php-cs
 """""""""""""""""""""""""""""""""""""""""""""
 let g:phpcs_php_path = 'php'
-let g:phpcs_path = '/home/work/bin/php-cs-fixer'
+let g:phpcs_path = '/home/chenyarong/bin/php-cs-fixer'
 let g:phpcs_using_cache = 0
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        vim-multiple-cursors
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_next_key = '<C-n>'
+let g:multi_cursor_prev_key = '<C-m>'
+let g:multi_cursor_skip_key = '<C-x>'
+let g:multi_cursor_quit_key = '<Esc>'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        vim-vue
+"""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+
 
 
 
