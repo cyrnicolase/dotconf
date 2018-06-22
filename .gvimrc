@@ -11,29 +11,43 @@ set guioptions-=r       " 隐藏右侧滚动条
 set guioptions-=b       " 隐藏底部滚动条
 set showtabline=0       " 隐藏tab标签
 set background=dark     " 设置背景色为黑色
+au GUIEnter * call MaximizeWindow()  " 窗口最大化, 以来 wmctrl
+
+function MaximizeWindow()
+   silent !wmctrl -r :ACTIVE: -b  add,maximized_vert,maximized_horz
+endfunction
 
 " 字体设置
-set guifont=Monaco:h14
-set guifont=Monospace\ 14
-
+set guifont=Noto\ Mono\ for\ Powerline\ Regular\ 12
 
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'
+Bundle 'chriskempson/tomorrow-theme'
+Bundle 'chriskempson/base16'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       vim-colors-solarized
 """"""""""""""""""""""""""""""""""""""""""""
-syntax enable
-set background=dark
-colorscheme solarized
+" syntax enable
+" set background=dark
+" colorscheme solarized
 let g:solarized_termcolors=256
 
 
 """"""""""""""""""""""""""""""""""""""""""""
-"       vim-molokai
+"       vim-color-molokai
 """"""""""""""""""""""""""""""""""""""""""""
 " syntax enable
 " set background=dark
 " let g:molokai_original = 1
+" colorscheme molokai
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       vim-colors-tomorrow
+""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
+
 

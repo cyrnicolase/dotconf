@@ -12,12 +12,13 @@ set nu
 set so=5
 set shiftwidth=4
 set tabstop=4
-" set softtabstop=4
+set softtabstop=4
 set laststatus=2
 set fileformats=unix,dos
 set autoindent
 set expandtab
 set smarttab
+set smartindent
 " set cindent
 set hlsearch
 set ignorecase
@@ -54,9 +55,24 @@ endif
 " endfunc
 
 " open json file with javascript syntastic
-autocmd BufNewFile, BufRead *.json, *.js set filetype=javascript
+autocmd BufNewFile,BufRead *.json,*.js set filetype=javascript
 " autocmd BufNewFile,BufRead *.js, set filetype=javascript
+autocmd BufNewFile,BufRead *.conf set filetype=nginx
 
+
+command! BcloseOthers call <SID>BufCloseOthers()  
+function! <SID>BufCloseOthers()  
+    let l:currentBufNum   = bufnr("%")  
+    let l:alternateBufNum = bufnr("#")  
+    for i in range(1,bufnr("$"))  
+        if buflisted(i)  
+            if i!=l:currentBufNum  
+                execute("bdelete ".i)  
+            endif  
+        endif  
+    endfor  
+endfunction  
+map <leader>bdo :BcloseOthers<cr> 
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -77,21 +93,22 @@ Bundle 'gmarik/vundle'
 " Bundle 'Lokaltog/vim-powerline'
 " Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tpope/vim-bundler'
-" Bundle 'tpope/vim-surround'
 " Bundle 'vim-scripts/matchit.zip'
 " Bundle 'vim-scripts/tComment'
 " Bundle 'mattn/emmet-vim'
 " Bundle 'msanders/snipmate.vim'
-" Bundle 'othree/html5.vim'
 " Bundle 'klen/python-mode'
 " Bundle 'shawncplus/phpcomplete.vim'
 " Bundle 'pangloss/vim-javascript'
 " Bundle 'stephpy/vim-php-cs-fixer'
-" Bundle 'docunext/closetag.vim'
 " Bundle 'Yggdroot/indentLine'
 " Bundle 'dericofilho/vim-phpfmt'
 " Bundle 'airblade/vim-gitgutter'
 " Bundle 'tomasr/molokai'
+Bundle 'docunext/closetag.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'othree/html5.vim'
+Bundle 'pangloss/vim-javascript'
 Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
@@ -112,7 +129,13 @@ Bundle 'groenewege/vim-less'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'cyrnicolase/vim-php-cs'
+Bundle 'mhinz/vim-grepper'
+Bundle 'chase/vim-ansible-yaml'
+Bundle 'vim-scripts/indentpython.vim'
+Bundle 'sonph/onehalf', {'rtp': 'vim/'}
+
 " Bundle 'yeaha/vim-phpfmt'
+
 
 " vim-scripts repos
 " Bundle 'taglist.vim'
@@ -166,8 +189,8 @@ Bundle 'cyrnicolase/vim-php-cs'
 """""""""""""""""""""""""""""""""""""""""""""
 "        Tagbar 
 """""""""""""""""""""""""""""""""""""""""""""
-" map <silent> <F3> :TagbarToggle<CR>
-" let g:tagbar_autofocus = 1
+map <silent> <F3> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -179,6 +202,7 @@ let g:NERDTreeDirArrowCollapsible = "~"
 let g:NERDTreeCascadeOpenSingleChildDir = 1
 let g:NERDTreeAutoCenterThreshold = 1
 let g:NERDTreeShowHidden = 0
+let g:NERDTreeIgnore = ['node_modules', "\.pyc$"]
 map <F2> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -199,6 +223,8 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_phpmd_exec = "~/bin/phpmd"
 let g:syntastic_php_phpmd_post_args = "~/.vim/custom/ruleset.xml"
 
+let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准html报错
+
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       PowerLine
@@ -217,8 +243,12 @@ set t_Co=256
 " let g:airline_theme="luna" 
 " let g:airline_theme="molokai"
 " let g:airline_theme="solarized"
-" nnoremap <C-N>: bn<CR>
+" nnoremap <C-A>: bn<CR>
 " nnoremap <C-P>: bp<CR>
+" nnoremap <leader>n : bn<cr>
+nnoremap <leader>p : bp<cr>
+nnoremap <c-tab> : bn<cr>
+nnoremap <c-l> : buffers<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -300,7 +330,7 @@ let g:ycm_use_ultisnips_completer = 1
 """""""""""""""""""""""""""""""""""""""""""""
 "        PHP-cs-fixer
 """""""""""""""""""""""""""""""""""""""""""""
-" let g:php_cs_fixer_path = "~/bin/php-cs-fixer" " define the path to the php-cs-fixer
+" let g:php_cs_fixer_path = "php ~/bin/php-cs-fixer" " define the path to the php-cs-fixer
 " let g:php_cs_fixer_level = "all"                " which level ?
 " let g:php_cs_fixer_config = "default"           " configuration
 " let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
@@ -315,7 +345,7 @@ let g:ycm_use_ultisnips_completer = 1
 """""""""""""""""""""""""""""""""""""""""""""
 "        colorscheme
 """""""""""""""""""""""""""""""""""""""""""""
-let g:molokai_original=1
+" let g:molokai_original=1
 let g:rehash256=1
 
 
@@ -353,7 +383,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|aop' "ignore node_modules directory
 "        vim-php-cs
 """""""""""""""""""""""""""""""""""""""""""""
 let g:phpcs_php_path = 'php'
-let g:phpcs_path = '/home/chenyarong/bin/php-cs-fixer'
+let g:phpcs_path = '~/bin/php-cs-fixer'
 let g:phpcs_using_cache = 0
 
 
@@ -372,6 +402,40 @@ let g:multi_cursor_quit_key = '<Esc>'
 "        vim-vue
 """""""""""""""""""""""""""""""""""""""""""""
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        mhinz/vim-grepper
+"""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>g :Grepper -tool ag<cr>
+nnoremap <leader>G :Grepper -tool git<cr>
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" Optional. The default behaviour should work for most users.
+let g:grepper               = {}
+let g:grepper.tools         = ['git', 'ag', 'rg']
+let g:grepper.jump          = 1
+let g:grepper.next_tool     = '<leader>g'
+let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        vim-ansible-yaml
+"""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufRead,BufNewFile *.yaml,*.yml setlocal filetype=ansible
+let g:ansible_options = {'ignore_blank_lines': 0}
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        vim-onehalflight
+"""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme onehalflight
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
 
 
 
