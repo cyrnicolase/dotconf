@@ -18,7 +18,7 @@ function MaximizeWindow()
 endfunction
 
 " 字体设置
-set guifont=Noto\ Mono\ for\ Powerline\ Regular\ 12
+" set guifont=Noto\ Mono\ for\ Powerline\ Regular\ 12
 
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'

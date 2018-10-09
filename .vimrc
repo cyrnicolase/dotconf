@@ -8,6 +8,10 @@ let g:mapleader = ","
 map <leader>t :tabnew<CR>
 map <leader>j :set filetype=javascript<CR>:w<CR>
 
+nnoremap <leader>p : bp<cr>
+nnoremap <c-tab> : bn<cr>
+nnoremap <c-l> : buffers<cr>
+
 set nu
 set so=5
 set shiftwidth=4
@@ -24,7 +28,6 @@ set hlsearch
 set ignorecase
 set ruler
 set nobackup
-
 set nocompatible               " be iMproved
 " filetype off                   " required!
 
@@ -56,9 +59,7 @@ endif
 
 " open json file with javascript syntastic
 autocmd BufNewFile,BufRead *.json,*.js set filetype=javascript
-" autocmd BufNewFile,BufRead *.js, set filetype=javascript
 autocmd BufNewFile,BufRead *.conf set filetype=nginx
-
 
 command! BcloseOthers call <SID>BufCloseOthers()  
 function! <SID>BufCloseOthers()  
@@ -90,7 +91,6 @@ Bundle 'gmarik/vundle'
 " Bundle 'vim-ruby/vim-ruby'
 " Bundle 'tpope/vim-rails'
 " Bundle 'xsbeats/vim-blade'
-" Bundle 'Lokaltog/vim-powerline'
 " Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tpope/vim-bundler'
 " Bundle 'vim-scripts/matchit.zip'
@@ -106,6 +106,7 @@ Bundle 'gmarik/vundle'
 " Bundle 'airblade/vim-gitgutter'
 " Bundle 'tomasr/molokai'
 Bundle 'docunext/closetag.vim'
+Bundle 'chr4/nginx.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
@@ -122,69 +123,15 @@ Bundle 'tpope/vim-endwise'
 Bundle 'vim-scripts/ctags.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'bling/vim-airline'
-Bundle 'powerline/fonts'
 Bundle 'godlygeek/tabular'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'groenewege/vim-less'
-Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'cyrnicolase/vim-php-cs'
 Bundle 'mhinz/vim-grepper'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'vim-scripts/indentpython.vim'
 Bundle 'sonph/onehalf', {'rtp': 'vim/'}
-
-" Bundle 'yeaha/vim-phpfmt'
-
-
-" vim-scripts repos
-" Bundle 'taglist.vim'
-
-" non github repos
-" Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (ie. when working on your own plugin)
-" Bundle 'file:///Users/gmarik/path/to/plugin'
-" ...
-
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-
-
-"""""""""""""""""""""""""""""""""""""""""""""
-"        Taglist 
-"""""""""""""""""""""""""""""""""""""""""""""
-" let Tlist_Auto_Highlight_Tag = 1
-" let Tlist_Auto_Open = 0
-" let Tlist_Auto_Update = 1
-" let Tlist_Close_On_Select = 0
-" let Tlist_Compact_Format = 0
-" let Tlist_Display_Prototype = 0
-" let Tlist_Display_Tag_Scope = 1
-" let Tlist_Enable_Fold_Column = 0
-" let Tlist_Exit_OnlyWindow = 0
-" let Tlist_File_Fold_Auto_Close = 0
-" let Tlist_GainFocus_On_ToggleOpen = 1
-" let Tlist_Hightlight_Tag_On_BufEnter = 1
-" let Tlist_Inc_Winwidth = 0
-" let Tlist_Max_Submenu_Items = 1
-" let Tlist_Max_Tag_Length = 30
-" let Tlist_Process_File_Always = 0
-" let Tlist_Show_Menu = 0
-" let Tlist_Show_One_File = 1
-" let Tlist_Sort_Type = "order"
-" let Tlist_Use_Horiz_Window = 0
-" let Tlist_Use_Right_Window = 1
-" let Tlist_WinWidth = 40
-" 已经不更新了
-" map <silent> <F4> :TlistToggle<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""
 "        Tagbar 
@@ -227,29 +174,22 @@ let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准htm
 
 
 """"""""""""""""""""""""""""""""""""""""""""
-"       PowerLine
-""""""""""""""""""""""""""""""""""""""""""""
-" set t_Co=256
-" let g:Powerline_symbols = 'fancy'
-
-
-""""""""""""""""""""""""""""""""""""""""""""
 "       AirLine
 """"""""""""""""""""""""""""""""""""""""""""
-let g:airline#extensions#tabline#enabled = 1
+set t_Co=256
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1 
-set t_Co=256
-" let g:airline_theme="luna" 
-" let g:airline_theme="molokai"
-" let g:airline_theme="solarized"
-" nnoremap <C-A>: bn<CR>
-" nnoremap <C-P>: bp<CR>
-" nnoremap <leader>n : bn<cr>
-nnoremap <leader>p : bp<cr>
-nnoremap <c-tab> : bn<cr>
-nnoremap <c-l> : buffers<cr>
 
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       PHP
