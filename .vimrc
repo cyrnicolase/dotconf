@@ -168,7 +168,7 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_phpmd_exec = "~/bin/phpmd"
-let g:syntastic_php_phpmd_post_args = "~/.vim/custom/ruleset.xml"
+let g:syntastic_php_phpmd_post_args = "~/.vim/rulesets.xml"
 
 let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准html报错
 
@@ -177,7 +177,7 @@ let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准htm
 "       AirLine
 """"""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1 
 
