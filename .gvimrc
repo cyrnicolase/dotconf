@@ -11,6 +11,8 @@ set guioptions-=r       " 隐藏右侧滚动条
 set guioptions-=b       " 隐藏底部滚动条
 set showtabline=0       " 隐藏tab标签
 set background=dark     " 设置背景色为黑色
+set vb t_vb=            " 关闭警告音
+
 au GUIEnter * call MaximizeWindow()  " 窗口最大化, 以来 wmctrl
 
 function MaximizeWindow()
