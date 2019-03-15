@@ -8,6 +8,9 @@ let g:mapleader = ","
 map <leader>t :tabnew<CR>
 map <leader>j :set filetype=javascript<CR>:w<CR>
 
+map <leader>php :w<CR>:!php %<CR>
+map <leader>py :w<CR>:!python %<CR>
+
 nnoremap <leader>p : bp<cr>
 nnoremap <c-tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
@@ -205,7 +208,6 @@ let g:airline_symbols.branch = '⎇'
 """"""""""""""""""""""""""""""""""""""""""""
 "       PHP
 """"""""""""""""""""""""""""""""""""""""""""
-map <leader>run :w<CR>:!php %<CR>
 
 " autocmd Filetype php setlocal omnifunc=phpcomelete#Complete
 autocmd Filetype php call AddPHPFuncList()
