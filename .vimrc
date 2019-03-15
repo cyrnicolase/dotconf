@@ -12,6 +12,8 @@ nnoremap <leader>p : bp<cr>
 nnoremap <c-tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set nu
 set so=5
 set shiftwidth=4
@@ -29,6 +31,9 @@ set ignorecase
 set ruler
 set nobackup
 set nocompatible               " be iMproved
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " filetype off                   " required!
 
 " chinese character supported
@@ -41,21 +46,24 @@ if has('gui_running') && filereadable("~/.gvimrc")
     source ~/.gvimrc
 endif
 
-" new file auto add header by filetype
-" autocmd BufNewFile *.sh,*.php exec ":call SetTitle()"
-" func SetTitle()
-"     if &filetype == 'php'
-"         call setline(1, "<?php")
-"         call setline(2, "")
-"     endif
-"     if &filetype == 'sh'
-"         call setline(1, "\#!/bin/bash")
-"         call setline(2, "")
-"     endif
-" 
-"     " jump to the last line
-"     autocmd BufNewFile * normal G
-" endfunc
+" 新文件自动添加头部内容
+autocmd BufNewFile *.py,*.sh,*.php exec ":call SetTitle()"
+func SetTitle()
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/python")
+        call append(line("."), "\# -*- coding:utf-8 -*-")
+        call append(line(".")+1, "")
+    elseif &filetype == 'php'
+        call setline(1, "<?php")
+        call append(line("."), "")
+    elseif &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+        call append(line("."), "")
+    endif
+
+    " jump to the last line
+    autocmd BufNewFile * normal G
+endfunc
 
 " open json file with javascript syntastic
 autocmd BufNewFile,BufRead *.json,*.js set filetype=javascript
@@ -68,7 +76,7 @@ function! <SID>BufCloseOthers()
     for i in range(1,bufnr("$"))  
         if buflisted(i)  
             if i!=l:currentBufNum  
-                execute("bdelete ".i)  
+                execute("bdelete ".i)
             endif  
         endif  
     endfor  
@@ -105,27 +113,27 @@ Bundle 'gmarik/vundle'
 " Bundle 'dericofilho/vim-phpfmt'
 " Bundle 'airblade/vim-gitgutter'
 " Bundle 'tomasr/molokai'
-Bundle 'docunext/closetag.vim'
+" Bundle 'pbrisbin/vim-mkdir'
+" Bundle 'tpope/vim-endwise'
+" Bundle 'jelera/vim-javascript-syntax'
+" Bundle 'othree/html5.vim'
+" Bundle 'tpope/vim-surround'
+" Bundle 'docunext/closetag.vim'
+" Bundle 'vim-scripts/ctags.vim'
+
+Bundle 'Yggdroot/indentLine'
 Bundle 'chr4/nginx.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive' 
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
-Bundle 'pbrisbin/vim-mkdir'
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-endwise'
-Bundle 'vim-scripts/ctags.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
 Bundle 'godlygeek/tabular'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'groenewege/vim-less'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'cyrnicolase/vim-php-cs'
 Bundle 'mhinz/vim-grepper'
@@ -143,7 +151,7 @@ let g:tagbar_autofocus = 1
 """"""""""""""""""""""""""""""""""""""""""""
 "       NerdTree
 """"""""""""""""""""""""""""""""""""""""""""
-let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrows=1
 let g:NERDTreeDirArrowExpandable = "+"
 let g:NERDTreeDirArrowCollapsible = "~"
 let g:NERDTreeCascadeOpenSingleChildDir = 1

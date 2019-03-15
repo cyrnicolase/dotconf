@@ -24,10 +24,10 @@ endfunction
 set guifont=Courier\ 12
 
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
-Bundle 'chriskempson/tomorrow-theme'
-Bundle 'chriskempson/base16'
-Bundle 'chriskempson/vim-tomorrow-theme'
+" Bundle 'tomasr/molokai'
+" Bundle 'chriskempson/tomorrow-theme'
+" Bundle 'chriskempson/base16'
+" Bundle 'chriskempson/vim-tomorrow-theme'
 
 
 """"""""""""""""""""""""""""""""""""""""""""
