@@ -50,9 +50,12 @@ endif
 autocmd BufNewFile *.py,*.sh,*.php exec ":call SetTitle()"
 func SetTitle()
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/python")
+        call setline(1, "\#!/usr/bin/env python")
         call append(line("."), "\# -*- coding:utf-8 -*-")
-        call append(line(".")+1, "")
+        call append(line(".")+1, "'''")
+        call append(line(".")+2, "DocString")
+        call append(line(".")+3, "'''")
+        call append(line(".")+4, "")
     elseif &filetype == 'php'
         call setline(1, "<?php")
         call append(line("."), "")
@@ -62,7 +65,7 @@ func SetTitle()
     endif
 
     " jump to the last line
-    autocmd BufNewFile * normal G
+    normal G
 endfunc
 
 " open json file with javascript syntastic
