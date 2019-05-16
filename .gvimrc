@@ -20,8 +20,11 @@ function MaximizeWindow()
 endfunction
 
 " 字体设置
-" set guifont=Noto\ Mono\ for\ Powerline\ Regular\ 12
-set guifont=Courier\ 12
+" set guifont=Courier\ 12
+" set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+" set guifont=Go\ Mono\ for\ Powerline\ 12
+" set guifont=Fira\ Mono\ for\ Powerline\ 12
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 12
 
 Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tomasr/molokai'

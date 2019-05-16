@@ -15,6 +15,8 @@ nnoremap <leader>p : bp<cr>
 nnoremap <c-tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
 
+set completeopt-=preview " 关闭preview 窗口
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nu
@@ -31,9 +33,12 @@ set smartindent
 " set cindent
 set hlsearch
 set ignorecase
-set ruler
+" set ruler
+set cursorline
 set nobackup
 set nocompatible               " be iMproved
+
+set guifont=Go\ Mono\ for\ Powerline\ 12
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -51,24 +56,28 @@ endif
 
 " 新文件自动添加头部内容
 autocmd BufNewFile *.py,*.sh,*.php exec ":call SetTitle()"
+" 通过命令方式给文件增加通用注释
+nnoremap <leader>ah :call SetTitle()<cr>
 func SetTitle()
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
-        call append(line("."), "\# -*- coding:utf-8 -*-")
-        call append(line(".")+1, "'''")
-        call append(line(".")+2, "DocString")
-        call append(line(".")+3, "'''")
-        call append(line(".")+4, "")
+        call append(0, "\#!/usr/bin/env python")
+        call append(1, "\# -*- coding:utf-8 -*-")   " `.`文中光标所在行
+        call append(2, "'''")     
+        call append(3, "DocString")
+        call append(4, "'''")
+        call append(5, "")
     elseif &filetype == 'php'
-        call setline(1, "<?php")
-        call append(line("."), "")
+        call append(0, "<?php")
+        call append(1, "")
     elseif &filetype == 'sh'
-        call setline(1, "\#!/bin/bash")
-        call append(line("."), "")
+        call append(0, "\#!/bin/bash")
+        call append(1, "")
     endif
 
-    " jump to the last line
-    normal G
+    " 跳转到光标以前的位置
+    normal :line(".")
+    " 切换到文件末尾
+    " normal G
 endfunc
 
 " open json file with javascript syntastic
@@ -144,7 +153,7 @@ Bundle 'jiangmiao/auto-pairs'
 Bundle 'cyrnicolase/vim-php-cs'
 Bundle 'mhinz/vim-grepper'
 Bundle 'chase/vim-ansible-yaml'
-Bundle 'vim-scripts/indentpython.vim'
+" Bundle 'vim-scripts/indentpython.vim'
 Bundle 'sonph/onehalf', {'rtp': 'vim/'}
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -180,6 +189,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_python_checkers = []
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_php_phpmd_exec = "~/bin/phpmd"
 let g:syntastic_php_phpmd_post_args = "~/.vim/rulesets.xml"
@@ -198,12 +208,12 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
+" let g:airline_left_sep = '▶'
+" let g:airline_left_alt_sep = '❯'
+" let g:airline_right_sep = '◀'
+" let g:airline_right_alt_sep = '❮'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       PHP
