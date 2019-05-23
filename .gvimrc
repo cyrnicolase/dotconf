@@ -26,11 +26,12 @@ endfunction
 " set guifont=Fira\ Mono\ for\ Powerline\ 12
 set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 12
 
-Bundle 'altercation/vim-colors-solarized'
+" Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tomasr/molokai'
 " Bundle 'chriskempson/tomorrow-theme'
 " Bundle 'chriskempson/base16'
 " Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'mhartington/oceanic-next'
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -56,4 +57,8 @@ let g:solarized_termcolors=256
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 
-
+""""""""""""""""""""""""""""""""""""""""""""
+"       oceanic-next
+""""""""""""""""""""""""""""""""""""""""""""
+colorscheme OceanicNext
+let g:airline_theme='oceanicnext'

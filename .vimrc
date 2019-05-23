@@ -11,8 +11,8 @@ map <leader>j :set filetype=javascript<CR>:w<CR>
 map <leader>php :w<CR>:!php %<CR>
 map <leader>py :w<CR>:!python %<CR>
 
-nnoremap <leader>p : bp<cr>
-nnoremap <c-tab> : bn<cr>
+nnoremap <s-tab> : bp<cr>
+nnoremap <tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
 
 set completeopt-=preview " 关闭preview 窗口
