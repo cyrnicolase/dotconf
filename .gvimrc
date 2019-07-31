@@ -31,7 +31,6 @@ set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 12
 " Bundle 'chriskempson/tomorrow-theme'
 " Bundle 'chriskempson/base16'
 " Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'mhartington/oceanic-next'
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -40,7 +39,7 @@ Bundle 'mhartington/oceanic-next'
 " syntax enable
 " set background=dark
 " colorscheme solarized
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -60,5 +59,5 @@ let g:solarized_termcolors=256
 """"""""""""""""""""""""""""""""""""""""""""
 "       oceanic-next
 """"""""""""""""""""""""""""""""""""""""""""
-colorscheme OceanicNext
-let g:airline_theme='oceanicnext'
+" colorscheme OceanicNext
+" let g:airline_theme='oceanicnext'
