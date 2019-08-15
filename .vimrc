@@ -183,6 +183,13 @@ map <silent> <F3> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        auto-pairs
+"""""""""""""""""""""""""""""""""""""""""""""
+au FileType php let b:AutoPairs = AutoPairsDefine({}, ['<?', '<?php'])      " 增加自定义闭合，以及删除自定义闭合；第一个参数是增加,第二个参数是删除；
+
+
 """"""""""""""""""""""""""""""""""""""""""""
 "       NerdTree
 """"""""""""""""""""""""""""""""""""""""""""
@@ -245,6 +252,8 @@ let g:ale_php_phpmd_ruleset = "~/.vim/rulesets.xml"
 let g:ale_list_window_size = 5
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+
+map <F4> :ALEToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""
@@ -330,11 +339,10 @@ let g:ycm_semantic_triggers = {
 \   'cpp,objcpp' : ['->', '.', '::'],
 \   'perl' : ['->'],
 \   'php' : ['->', '::'],
-\   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+\   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir' : ['.'],
 \   'ruby' : ['.', '::'],
 \   'lua' : ['.', ':'],
 \   'erlang' : [':'],
-\   'go': ['.'],
 \}
 let g:ycm_cache_omnifunc = 1
 let g:ycm_use_ultisnips_completer = 1
