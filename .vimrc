@@ -70,6 +70,9 @@ func SetTitle()
     elseif &filetype == 'sh'
         call append(0, "\#!/bin/bash")
         call append(1, "")
+    elseif &filetype == 'lua'
+        call append(0, "\#!/usr/local/bin/lua")
+        call append(1, "")
     endif
 
     " 跳转到光标以前的位置
@@ -94,6 +97,8 @@ func RunScript()
         execute "!bash %"
     elseif &filetype == 'go'
         execute "!go run %"
+    elseif &filetype == 'lua'
+        execute "!lua %"
     endif
 endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,7 +164,7 @@ Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive' 
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-airline/vim-airline'
