@@ -36,6 +36,7 @@ set nobackup
 set nocompatible               " be iMproved
 
 set guifont=Go\ Mono\ for\ Powerline\ 12
+syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
