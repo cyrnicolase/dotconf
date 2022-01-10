@@ -7,10 +7,12 @@ let g:mapleader = ","
 
 map <leader>t :tabnew<CR>
 map <leader>x : bdelete %<CR>
+map <F7> :term<CR>
 
 nnoremap <s-tab> : bp<cr>
 nnoremap <tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
+nnoremap <c-t> : term<cr>
 
 set completeopt-=preview " 关闭preview 窗口
 
@@ -34,8 +36,10 @@ set ignorecase
 set cursorline
 set nobackup
 set nocompatible               " be iMproved
+set backspace=2
 
-set guifont=Go\ Mono\ for\ Powerline\ 12
+" set guifont=Go\ Mono\ for\ Powerline\ 12
+set guifont=Roboto\ Mono\ Light\ for\ Powerline:h15
 syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,7 +106,8 @@ func RunScript()
         execute "!lua %"
     endif
 endfunc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 " open json file with javascript syntastic
 autocmd BufNewFile,BufRead *.json,*.js set filetype=javascript
@@ -136,7 +141,6 @@ Bundle 'VundleVim/Vundle.vim'
 " Bundle 'vim-ruby/vim-ruby'
 " Bundle 'tpope/vim-rails'
 " Bundle 'xsbeats/vim-blade'
-" Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tpope/vim-bundler'
 " Bundle 'vim-scripts/matchit.zip'
 " Bundle 'vim-scripts/tComment'
@@ -151,12 +155,16 @@ Bundle 'VundleVim/Vundle.vim'
 " Bundle 'pbrisbin/vim-mkdir'
 " Bundle 'tpope/vim-endwise'
 " Bundle 'jelera/vim-javascript-syntax'
-" Bundle 'othree/html5.vim'
 " Bundle 'tpope/vim-surround'
 " Bundle 'docunext/closetag.vim'
 " Bundle 'vim-scripts/ctags.vim'
 " Bundle 'scrooloose/syntastic'
+" Bundle 'brookhong/cscope.vim'
 
+Bundle 'othree/html5.vim'
+Bundle 'tomasr/molokai'
+Bundle 'toml-lang/toml'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/indentpython.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'chr4/nginx.vim'
@@ -165,7 +173,7 @@ Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive' 
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-airline/vim-airline'
@@ -180,6 +188,15 @@ Bundle 'sonph/onehalf', {'rtp': 'vim/'}
 Bundle 'mhartington/oceanic-next'
 
 call vundle#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        vim-go 
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:go_fmt_command="goimports"    " 使用goimports 替换gofmt 
+let g:go_def_mode = "gopls"
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""
 "        Tagbar 
@@ -215,7 +232,7 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_python_checkers = []
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_php_phpmd_exec = "~/bin/phpmd"
+let g:syntastic_php_phpmd_exec = "~/.bin/phpmd"
 let g:syntastic_php_phpmd_post_args = "~/.vim/rulesets.xml"
 let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准html报错
 
@@ -225,13 +242,23 @@ let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准htm
 """"""""""""""""""""""""""""""""""""""""""""
 let b:ale_fixers = {
 \   'php': ['php_cs_fixer'],
-\   'go' : ['gofmt'],
+\   'go' : ['goimports'],
 \}
 let g:ale_linters = {
 \   'php': ['php', 'phpmd'],
-\   'go': ['golint'],
+\   'go': ['revive'],
 \   'python': ['pylint'],
 \}
+
+call ale#linter#Define('go', {
+\   'name': 'revive',
+\   'output_stream': 'both',
+\   'executable': 'revive',
+\   'read_buffer': 0,
+\   'command': 'revive %t',
+\   'callback': 'ale#handlers#unix#HandleAsWarning',
+\})
+
 let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
@@ -300,7 +327,6 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsExclude = {'php': ["<?", "<?php", "'''"],}
 let g:AutoPairsExtra = {
 \'html': {'<!--': '-->', '{%' : '%}'},
-\'go': {'func main(': ') {\n\n}', 'go func(': ") {\n\n}",},
 \}
 
 
@@ -354,7 +380,7 @@ let g:ycm_use_ultisnips_completer = 1
 """""""""""""""""""""""""""""""""""""""""""""
 "        PHP-cs-fixer
 """""""""""""""""""""""""""""""""""""""""""""
-" let g:php_cs_fixer_path = "php ~/bin/php-cs-fixer" " define the path to the php-cs-fixer
+" let g:php_cs_fixer_path = "php ~/.bin/php-cs-fixer" " define the path to the php-cs-fixer
 " let g:php_cs_fixer_level = "all"                " which level ?
 " let g:php_cs_fixer_config = "default"           " configuration
 " let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
@@ -392,7 +418,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|aop' "ignore node_modules directory
 "        vim-php-cs
 """""""""""""""""""""""""""""""""""""""""""""
 let g:phpcs_php_path = 'php'
-let g:phpcs_path = '~/bin/php-cs-fixer'
+let g:phpcs_path = '~/.bin/php-cs-fixer'
 let g:phpcs_using_cache = 0
 
 
@@ -451,5 +477,49 @@ let g:ansible_options = {'ignore_blank_lines': 0}
 "       oceanic-next
 """"""""""""""""""""""""""""""""""""""""""""
 colorscheme OceanicNext
-let g:airline_theme='oceanicnext'
+" let g:airline_theme='oceanicnext'
 
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       vim-colors-solarized
+""""""""""""""""""""""""""""""""""""""""""""
+" set background=dark
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" let g:molokai_original = 1
+" colorscheme molokai
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""
+"       cscope
+""""""""""""""""""""""""""""""""""""""""""""
+" if has("cscope")
+"     set cscopetag
+"     set csto=0
+"     set cscopeverbose
+" 
+"     " add any cscope database in current directory
+"     if filereadable("cscope.out")
+"         cs add cscope.out
+"     elseif $CSCOPE_DB != ""
+"         cs add $CSCOPE_DB
+"     endif
+" 
+"     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> 
+"     nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> 
+"     nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> 
+"     nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> 
+"     nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> 
+"     nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+"     nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"     nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"        pangloss/vim-javascript
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1

@@ -10,21 +10,27 @@ set guioptions-=L       " 隐藏左侧滚动条
 set guioptions-=r       " 隐藏右侧滚动条
 set guioptions-=b       " 隐藏底部滚动条
 set showtabline=0       " 隐藏tab标签
-set background=dark     " 设置背景色为黑色
+" set background=dark     " 设置背景色为黑色
 set vb t_vb=            " 关闭警告音
 
-au GUIEnter * call MaximizeWindow()  " 窗口最大化, 以来 wmctrl
+" au GUIEnter * call MaximizeWindow()  " 窗口最大化, 以来 wmctrl
 
-function MaximizeWindow()
-   silent !wmctrl -r :ACTIVE: -b  add,maximized_vert,maximized_horz
-endfunction
+" function MaximizeWindow()
+"    silent !wmctrl -r :ACTIVE: -b  add,maximized_vert,maximized_horz
+" endfunction
+
+if !exists("macvim_skip_colorscheme") && !exists("colors_name")
+    colorscheme macvim
+endif
 
 " 字体设置
 " set guifont=Courier\ 12
 " set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
 " set guifont=Go\ Mono\ for\ Powerline\ 12
 " set guifont=Fira\ Mono\ for\ Powerline\ 12
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 12
+" set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 12
+"
+" set guifont=Courier\ New:h14
 
 " Bundle 'altercation/vim-colors-solarized'
 " Bundle 'tomasr/molokai'
