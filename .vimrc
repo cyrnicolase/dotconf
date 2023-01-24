@@ -18,6 +18,8 @@ set completeopt-=preview " 关闭preview 窗口
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set visualbell
+set t_vb=
 set nu
 set so=5
 set shiftwidth=4
@@ -173,7 +175,7 @@ Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive' 
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-airline/vim-airline'
