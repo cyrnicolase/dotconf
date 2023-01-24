@@ -48,7 +48,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use "ful1e5/onedark.nvim"
+  use "joshdick/onedark.vim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
