@@ -27,6 +27,11 @@ nvim_tree.setup {
         mappings = {
             list = {
                 { key = "u", action = "dir_up" },
+                { key = "p", action = "parent_node" },
+                { key = "m", action = "rename" },
+                { key = "t", action = "tabnew" },
+                { key = "s", action = "vsplit" },
+                { key = "v", action = "split" },
             },
         },
     },
@@ -36,5 +41,8 @@ nvim_tree.setup {
     filters = {
         dotfiles = true,
     },
+    git = {
+        enable = false,
+    }
 }
 
