@@ -1,4 +1,4 @@
-# 一些个人软件配置文件汇总
+# Tool configure
 
 ## nvim 配置
 
