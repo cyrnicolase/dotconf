@@ -1,0 +1,8 @@
+require("nicol.options")
+require("nicol.keymaps")
+require("nicol.plugins")
+require("nicol.cmp")
+require("nicol.colorschemes")
+require("nicol.nvim-tree")
+require("nicol.treesitter")
+require("nicol.autopairs")

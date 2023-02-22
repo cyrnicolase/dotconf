@@ -1,4 +1,9 @@
-# 一些个人软件配置文件汇总
+# Tool configure
+
+## nvim 配置
+
+ln -s nvim ~/.config/nvim
+
 ## vim.conf
 1. Linux 环境下.vimrc 文件
 2. 使用vundle 进行包管理
