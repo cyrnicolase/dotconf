@@ -1,6 +1,7 @@
 " 版本管理工具vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+filetype off                  " required!
 filetype plugin indent on     " required!
 let mapleader = ","
 let g:mapleader = ","
@@ -12,7 +13,7 @@ map <F7> :term<CR>
 nnoremap <s-tab> : bp<cr>
 nnoremap <tab> : bn<cr>
 nnoremap <c-l> : buffers<cr>
-nnoremap <c-t> : term<cr>
+" nnoremap <c-t> : term<cr>
 
 set completeopt-=preview " 关闭preview 窗口
 
@@ -44,7 +45,6 @@ syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" filetype off                   " required!
 
 " chinese character supported
 set fileencodings=utf-8,cp936,gbk,default,latin1
@@ -65,7 +65,7 @@ func SetTitle()
     if &filetype == 'python'
         call append(0, "\#!/usr/bin/env python")
         call append(1, "\# -*- coding:utf-8 -*-")   " `.`文中光标所在行
-        call append(2, "'''")     
+        call append(2, "'''")
         call append(3, "DocString")
         call append(4, "'''")
         call append(5, "")
@@ -113,19 +113,19 @@ endfunc
 autocmd BufNewFile,BufRead *.json,*.js set filetype=javascript
 autocmd BufNewFile,BufRead *.conf set filetype=nginx
 
-command! BcloseOthers call <SID>BufCloseOthers()  
-function! <SID>BufCloseOthers()  
-    let l:currentBufNum   = bufnr("%")  
-    let l:alternateBufNum = bufnr("#")  
-    for i in range(1, bufnr("$"))  
-        if buflisted(i)  
-            if i != l:currentBufNum  
+command! BcloseOthers call <SID>BufCloseOthers()
+function! <SID>BufCloseOthers()
+    let l:currentBufNum   = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+    for i in range(1, bufnr("$"))
+        if buflisted(i)
+            if i != l:currentBufNum
                 execute("bdelete ".i)
-            endif  
-        endif  
-    endfor  
-endfunction  
-map <leader>bdo :BcloseOthers<cr> 
+            endif
+        endif
+    endfor
+endfunction
+map <leader>bdo :BcloseOthers<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,7 +172,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'posva/vim-vue'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'tpope/vim-fugitive' 
+Bundle 'tpope/vim-fugitive'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
@@ -183,7 +183,7 @@ Bundle 'cyrnicolase/vim-php-cs'
 Bundle 'mhinz/vim-grepper'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'fatih/vim-go'
-Bundle 'w0rp/ale'
+Bundle 'dense-analysis/ale'
 Bundle 'sonph/onehalf', {'rtp': 'vim/'}
 Bundle 'mhartington/oceanic-next'
 
@@ -191,15 +191,15 @@ call vundle#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-"        vim-go 
+"        vim-go
 """""""""""""""""""""""""""""""""""""""""""""
-let g:go_fmt_command="goimports"    " 使用goimports 替换gofmt 
+let g:go_fmt_command="goimports"    " 使用goimports 替换gofmt
 let g:go_def_mode = "gopls"
 
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-"        Tagbar 
+"        Tagbar
 """""""""""""""""""""""""""""""""""""""""""""
 map <silent> <F3> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -243,9 +243,10 @@ let syntastic_mode_map = {'passive_filetypes': ['html']}    " 忽略非标准htm
 let b:ale_fixers = {
 \   'php': ['php_cs_fixer'],
 \   'go' : ['goimports'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_linters = {
-\   'php': ['php', 'phpmd'],
+\   'php': ['php', 'intelephense', 'phpmd'],
 \   'go': ['revive'],
 \   'python': ['pylint'],
 \}
@@ -255,13 +256,16 @@ call ale#linter#Define('go', {
 \   'output_stream': 'both',
 \   'executable': 'revive',
 \   'read_buffer': 0,
-\   'command': 'revive %t',
+\   'command': 'revive -config ~/.config/go/revive.toml ./...',
 \   'callback': 'ale#handlers#unix#HandleAsWarning',
 \})
 
+
+let g:ale_go_revive_options = '-config $HOME/.config/go/revive.toml'
 let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_insert_leave = 0
@@ -286,7 +290,7 @@ map <F4> :ALEToggle<CR>
 set t_Co=256
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -321,7 +325,7 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-"        Auto-Pairs 
+"        Auto-Pairs
 """""""""""""""""""""""""""""""""""""""""""""
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsExclude = {'php': ["<?", "<?php", "'''"],}
@@ -331,14 +335,14 @@ let g:AutoPairsExtra = {
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-"        PHPComplete 
+"        PHPComplete
 """""""""""""""""""""""""""""""""""""""""""""
 " let g:phpcomplete_relax_static_constraint = 1
 " let g:phpcomplete_complete_for_unknown_classes = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""
-"        YouCompleteme 
+"        YouCompleteme
 """""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_min_num_of_chars_for_completion = 2
@@ -367,6 +371,7 @@ let g:ycm_semantic_triggers = {
 \   'cpp,objcpp' : ['->', '.', '::'],
 \   'perl' : ['->'],
 \   'php' : ['->', '::'],
+\   'go' : ['.'],
 \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir' : ['.'],
 \   'ruby' : ['.', '::'],
 \   'lua' : ['.', ':'],
@@ -386,7 +391,7 @@ let g:ycm_use_ultisnips_completer = 1
 " let g:php_cs_fixer_php_path = "/usr/local/php/bin/php"             " Path to PHP
 " let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default (<leader>pcd)
 " let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option"
-" 
+"
 " map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
 " map <leader>pcf :call PhpCsFixerFixFile()<CR>
 
@@ -469,14 +474,14 @@ let g:ansible_options = {'ignore_blank_lines': 0}
 "        vim-onehalflight
 """""""""""""""""""""""""""""""""""""""""""""
 " colorscheme onehalflight
-" colorscheme onehalfdark
+" " colorscheme onehalfdark
 " let g:airline_theme='onehalfdark'
 
 
 """"""""""""""""""""""""""""""""""""""""""""
 "       oceanic-next
 """"""""""""""""""""""""""""""""""""""""""""
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " let g:airline_theme='oceanicnext'
 
 
@@ -487,7 +492,7 @@ colorscheme OceanicNext
 " colorscheme solarized
 " let g:solarized_termcolors=256
 " let g:molokai_original = 1
-" colorscheme molokai
+colorscheme molokai
 
 
 
@@ -498,20 +503,20 @@ colorscheme OceanicNext
 "     set cscopetag
 "     set csto=0
 "     set cscopeverbose
-" 
+"
 "     " add any cscope database in current directory
 "     if filereadable("cscope.out")
 "         cs add cscope.out
 "     elseif $CSCOPE_DB != ""
 "         cs add $CSCOPE_DB
 "     endif
-" 
-"     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> 
-"     nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> 
-"     nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> 
-"     nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> 
-"     nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> 
-"     nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+"
+"     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"     nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+"     nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+"     nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+"     nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"     nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 "     nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 "     nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " endif
