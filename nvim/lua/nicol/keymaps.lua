@@ -64,4 +64,7 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Nvim-tree --
-keymap("n", "<F2>", ':NvimTreeToggle<CR>', opts)
+keymap("n", "<F2>", ":NvimTreeToggle<CR>", opts)
+
+-- fzf
+keymap("n", "<C-p>", ":FzfLua files<CR>", opts)

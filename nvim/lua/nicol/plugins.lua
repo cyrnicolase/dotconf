@@ -78,6 +78,13 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
 
+  use {
+    'numToStr/Comment.nvim',
+  }
+
+  use {
+    'ibhagwan/fzf-lua'
+  }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

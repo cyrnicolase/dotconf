@@ -32,6 +32,7 @@ nvim_tree.setup {
                 { key = "t", action = "tabnew" },
                 { key = "s", action = "vsplit" },
                 { key = "v", action = "split" },
+                { key = "i", action = "split" },
             },
         },
     },
