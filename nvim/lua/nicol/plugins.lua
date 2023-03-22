@@ -49,23 +49,11 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "joshdick/onedark.vim"
-
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "hrsh7th/cmp-nvim-lsp"    -- lsp
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "onsails/lspkind-nvim"
+  use "folke/neodev.nvim"
+  use 'numToStr/Comment.nvim'
+  use 'ibhagwan/fzf-lua'
 
-  -- snippets
-  -- use "L3MON4D3/LuaSnip" --snippet engine
-  -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  --
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -78,13 +66,23 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
 
-  use {
-    'numToStr/Comment.nvim',
-  }
 
-  use {
-    'ibhagwan/fzf-lua'
-  }
+    -- LSP Support
+    use {'neovim/nvim-lspconfig'}
+    use {'williamboman/mason.nvim'}
+    use {'williamboman/mason-lspconfig.nvim'}
+    use {'jose-elias-alvarez/null-ls.nvim'}
+
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-path'}
+    use {'saadparwaiz1/cmp_luasnip'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-nvim-lua'}
+    use {"hrsh7th/cmp-cmdline"} -- cmdline completions
+
+    use {'L3MON4D3/LuaSnip'}
+    use {'rafamadriz/friendly-snippets'}
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
