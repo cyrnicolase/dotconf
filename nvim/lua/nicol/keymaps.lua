@@ -68,3 +68,6 @@ keymap("n", "<F2>", ":NvimTreeToggle<CR>", opts)
 
 -- fzf
 keymap("n", "<C-p>", ":FzfLua files<CR>", opts)
+
+-- lsp
+keymap("n", "<S-F6>", ":lua vim.lsp.buf.rename()<CR>", opts)  -- 重命名buf 下的变量名字

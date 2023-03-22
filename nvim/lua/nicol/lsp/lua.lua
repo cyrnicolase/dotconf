@@ -1,4 +1,4 @@
-local runtime_path = vim.split(package.path, ";")
+local runtime_path = vim.split(package.path, ";", {plain = true})
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
