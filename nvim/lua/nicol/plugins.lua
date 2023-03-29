@@ -50,7 +50,6 @@ return packer.startup(function(use)
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "joshdick/onedark.vim"
   use "onsails/lspkind-nvim"
-  use "folke/neodev.nvim"
   use 'numToStr/Comment.nvim'
   use 'ibhagwan/fzf-lua'
 
