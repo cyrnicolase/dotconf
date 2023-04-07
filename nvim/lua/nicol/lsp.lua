@@ -37,6 +37,7 @@ mason_lspconfig.setup {
   ensure_installed = {
     "lua_ls",
     "gopls",
+    "pyright",
   },
   automatic_installation = true,
 }
@@ -47,6 +48,7 @@ null_ls.setup {}
 local servers = {
   lua_ls = require("nicol.lsp.lua"),
   gopls = require("nicol.lsp.go"),
+  pyright = require("nicol.lsp.pyright"),
 }
 
 
